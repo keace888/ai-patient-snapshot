@@ -11,7 +11,7 @@ import requests
 # ─── Service Account & Dataset Listing ─────────────────────────────────────
 
 # Path to your service account key
-KEY_PATH = r"C:\\Users\\marco\\Downloads\\snapshot-api\\ai-patient-snapshot-001-65959a4dade9.json"
+KEY_PATH = r"C:\\Users\\marco\\Downloads\\snapshot-api\\ai-patient-snapshot-001-6423a71a8f05.json"
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = KEY_PATH
 
 # Build the Healthcare API client
@@ -154,13 +154,13 @@ async def snapshot(pid: str):
     report = summarize(data)
     return {"patient_id": pid, "report": report}
 
-'''
+
 if __name__ == "__main__":
     pid = "c48ed5ae-6c92-2ff2-29c0-e6e71c7034c1"
     data = collect(pid)
     report = summarize(data)
     print(report)
-'''
+
     
 
 

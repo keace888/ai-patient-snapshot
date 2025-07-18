@@ -1,5 +1,5 @@
 import streamlit as st, requests
-BACKEND="https://b61b099226de.ngrok-free.app"
+BACKEND="https://def8573b0af2.ngrok-free.app"
 st.title("AI Patient Snapshot")
 pid = st.text_input("Patient ID", "smart-123")
 if st.button("Generate Snapshot"):

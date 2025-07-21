@@ -159,13 +159,13 @@ app.add_middleware(
 
 @app.get("/snapshot/{pid}")
 async def snapshot(pid: str):
-    data = collect(pid)
-    result = summarize(data)
-    summary = result["summary"]  # whatever your summarize() returns
+    data    = collect(pid)
+    summary = summarize(data)      # now `summary` is the string directly
     return {
         "patient_id": pid,
-        "report": summary
+        "report":     summary
     }
+
 
 
 '''

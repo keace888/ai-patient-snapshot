@@ -1,7 +1,8 @@
 import streamlit as st
 import requests
 
-BACKEND = "https://ai-snapshot.loca.lt"  # your localtunnel URL
+# Point this at your local FastAPI (or your ngrok/localtunnel URL if you still need it)
+BACKEND = " https://ai-snapshot.loca.lt"
 
 st.title("AI Patient Snapshot")
 pid = st.text_input("Patient ID", "smart-123")
@@ -11,20 +12,14 @@ if st.button("Generate Snapshot"):
         resp = requests.get(f"{BACKEND}/snapshot/{pid}", timeout=300)
         resp.raise_for_status()
     except requests.RequestException as e:
-        st.error(f"❌ Request failed: {e}")
+        st.error(f"Request failed: {e}")
     else:
-        # Dump status & raw body so we can see what came back
-        st.write("Status:", resp.status_code)
-        st.write("Body:", resp.text)
-
-        # Now try to parse JSON
-        try:
-            data = resp.json()
-        except ValueError:
-            st.error("❌ Response wasn’t valid JSON.")
+        data = resp.json()  # { "patient_id": "...", "report": "…markdown here…" }
+        report = data.get("report")
+        if report:
+            # Render exactly the markdown your LLM produced,
+            # including headings, code fences, and lists
+            st.markdown(report)
         else:
-            st.write("Parsed JSON:", data)
-            if "report" in data:
-                st.markdown(data["report"])
-            else:
-                st.error("❌ No `report` field in the response.")
+            st.error("No summary returned from the backend.")
+

@@ -9,7 +9,7 @@ pid = st.text_input("Patient ID", "smart-123")
 
 if st.button("Generate Snapshot"):
     try:
-        resp = requests.get(f"{BACKEND}/snapshot/{pid}", timeout=300)
+        resp = requests.get(f"{BACKEND}/snapshot/{pid}", timeout=600)
         resp.raise_for_status()
     except requests.RequestException as e:
         st.error(f"Request failed: {e}")

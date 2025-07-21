@@ -137,7 +137,7 @@ def summarize(fhir_bundle: dict) -> str:
   Send the cleaned FHIR JSON to the Colab MedGemma endpoint
   and return its summary text.
   """
-  COLAB_URL = "https://461cdb547ffc.ngrok-free.app"  # <-- replace every time you restart Colab
+  COLAB_URL = "https://66476cfdc753.ngrok-free.app"  # <-- replace every time you restart Colab
   resp = requests.post(
     f"{COLAB_URL}/summarize",
     json={"fhir": fhir_bundle},

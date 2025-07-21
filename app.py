@@ -1,5 +1,5 @@
 import streamlit as st, requests
-BACKEND="http://localhost:8000"
+BACKEND="https://ai-snapshot.loca.lt"
 st.title("AI Patient Snapshot")
 pid = st.text_input("Patient ID", "smart-123")
 if st.button("Generate Snapshot"):

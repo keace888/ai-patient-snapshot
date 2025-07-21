@@ -147,7 +147,16 @@ def summarize(fhir_bundle: dict) -> str:
   return resp.json()["summary"]
 
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins=["*"],           # or set to ["https://share.streamlit.io"]
+  allow_methods=["*"],
+  allow_headers=["*"],
+)
+
 @app.get("/snapshot/{pid}")
 async def snapshot(pid: str):
     data = collect(pid)

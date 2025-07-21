@@ -137,7 +137,7 @@ def summarize(fhir_bundle: dict) -> str:
   Send the cleaned FHIR JSON to the Colab MedGemma endpoint
   and return its summary text.
   """
-  COLAB_URL = "https://def8573b0af2.ngrok-free.app"  # <-- replace
+  COLAB_URL = "https://461cdb547ffc.ngrok-free.app"  # <-- replace every time you restart Colab
   resp = requests.post(
     f"{COLAB_URL}/summarize",
     json={"fhir": fhir_bundle},
@@ -151,16 +151,21 @@ app = FastAPI()
 @app.get("/snapshot/{pid}")
 async def snapshot(pid: str):
     data = collect(pid)
-    report = summarize(data)
-    return {"patient_id": pid, "report": report}
+    result = summarize(data)
+    summary = result["summary"]  # whatever your summarize() returns
+    return {
+        "patient_id": pid,
+        "report": summary
+    }
 
 
+'''
 if __name__ == "__main__":
-    pid = "c48ed5ae-6c92-2ff2-29c0-e6e71c7034c1"
+    pid = "050b702e-a3bc-154d-4b3e-e0e6640a7869"
     data = collect(pid)
     report = summarize(data)
     print(report)
-
+'''
     
 
 

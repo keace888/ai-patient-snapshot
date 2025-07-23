@@ -1,8 +1,9 @@
 import streamlit as st
 import requests
-
+from pyngrok import ngrok
 # Point this at your local FastAPI (or your ngrok/localtunnel URL if you still need it)
-BACKEND = "https://ai-snapshot.loca.lt"
+BACKEND = ngrok.connect(8000).public_url
+print(f"Backend URL: {BACKEND}")
 
 st.title("AI Patient Snapshot")
 pid = st.text_input("Patient ID", "smart-123")
